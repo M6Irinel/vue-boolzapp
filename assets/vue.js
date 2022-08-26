@@ -12,7 +12,9 @@ new Vue( {
             this.$refs.bar_search.focus();
         },
         blurr () {
-            this.icons_search = true;
+            setTimeout( () => {
+                this.icons_search = true;
+            }, 100 );
         },
         search_icons () {
             this.icons_search = !this.icons_search;
