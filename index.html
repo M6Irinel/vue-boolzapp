@@ -21,17 +21,21 @@
     <div id="app">
         <div class="container h_100 d-flex justify-content-center align-items-center">
             <div class="view d-flex w-100 h_100 p-3">
-                <div class="users flex-grow-1 d-flex flex-column">
+                <div class="users d-flex flex-column">
                     <header class="px-1 py-1 d-flex align-items-center">
-                        <img class="rounded-circle c-pointer" src="./assets/img/avatar_io.jpg" alt="my img profile">
+
+                        <img class="img_height rounded-circle c-pointer" src="./assets/img/avatar_io.jpg" alt="my img profile">
                         <div class="flex-grow-1 fs-7 fw-semibold d-flex align-items-center"> Sofia </div>
+
                         <div class="me_buttons d-flex gap-1">
                             <i class="c-pointer hover color-gray px-1 fa-solid fa-circle-notch"></i>
                             <i class="c-pointer hover color-gray px-1 fa-solid fa-message"></i>
                             <i class="c-pointer hover color-gray px-2 fa-solid fa-ellipsis-vertical"></i>
                         </div>
+
                     </header>
                     <div class="notifications my-bg-white">
+
                         <div class="top px-1 py-2 d-flex gap-2 align-items-center">
                             <i class="d-flex justify-content-center align-items-center rounded-circle square p-2 bg-white c-pointer fa-solid fa-bell-slash"></i>
                             <div class="paragraphs d-flex flex-column">
@@ -39,18 +43,33 @@
                                 <a class="m-0 fs-7 link-dark hover-white" href="#nogo">Attiva notifiche desktop</a>
                             </div>
                         </div>
+
                         <div class="bottom bg-white m-1 d-flex align-items-center border">
-                            <button class="color-gray d-flex no-border h-100 width-search justify-content-center align-items-center btn rounded-0">
+                            <button class="fs-7 color-gray d-flex no-border h-100 width-search justify-content-center align-items-center btn rounded-0">
                                 <i @click="search_icons" :class="search_icon"></i>
                             </button>
-                            <input @click="focuss" @blur="blurr" ref="bar_search" v-model="search" class="w-100 h-100 fs-7 py-1 no-border fw-semibold" type="text" placeholder="Cerca o inizia una nuova chat">
+                            <input @click="search_focus" @blur="search_blur" ref="bar_search" v-model="search" class="w-100 h-100 fs-7 py-1 no-border fw-semibold" type="text" placeholder="Cerca o inizia una nuova chat">
                         </div>
+
                     </div>
-                    <nav class="flex-grow-1 bg-info px-2 py-1">
-                        users
+                    <nav class="flex-grow-1 py-1 overflow-auto">
+                        <ul class="list-unstyled">
+                            <template v-for="(user, index) in contacts">
+                                <li class="px-3 c-pointer hover_bg d-flex align-items-center hei py-2 gap-3" :key="index">
+                                    <img class="img_height rounded-circle square img-fluid" :src="'./assets/img/avatar'+user.avatar+'.jpg'" :alt="user.name">
+                                    <div class="ms-auto me-auto flex-grow-1">
+                                        <p class="m-0 fs-7 fw-semibold"> {{user.name}} </p>
+                                        <p class="m-0 fs-8 color-gray"> Ultimo messaggio inviato </p>
+                                    </div>
+                                    <div class="date_envoy fs-8 color-gray">
+                                        {{last_message_users(user)}}
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
                     </nav>
                 </div>
-                <div class="chat"></div>
+                <div class="chat flex-grow-1"></div>
             </div>
         </div>
     </div>

@@ -6,10 +6,6 @@ body {
     background-color: #fff;
 }
 
-.users header img {
-    height: 40px;
-}
-
 .chat {
     background-color: #e5ddd5;
     flex-grow: 2;
@@ -32,6 +28,14 @@ body {
 }
 
 /* add class ============================================================== */
+
+.hover_bg {
+    transition: background-color 0.1s ease-in-out;
+}
+
+.hover_bg:hover {
+    background-color: #e9ebeb;
+}
 
 .hover {
     filter: brightness(0.5);
@@ -61,6 +65,10 @@ body {
     font-size: 0.7rem;
 }
 
+.fs-8 {
+    font-size: 0.6rem;
+}
+
 .square {
     aspect-ratio: 1 !important;
 }
@@ -75,4 +83,8 @@ body {
 
 .width-search {
     min-width: 50px;
+}
+
+.img_height {
+    height: 40px;
 }
