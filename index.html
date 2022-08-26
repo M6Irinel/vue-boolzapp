@@ -22,8 +22,14 @@
         <div class="container h_100 d-flex justify-content-center align-items-center">
             <div class="view d-flex w-100 h_100 p-3">
                 <div class="users flex-grow-1 d-flex flex-column">
-                    <header class="px-1 py-1">
-                        my user
+                    <header class="px-1 py-1 d-flex align-items-center">
+                        <img class="rounded-circle c-pointer" src="./assets/img/avatar_io.jpg" alt="my img profile">
+                        <div class="flex-grow-1 fs-7 fw-semibold d-flex align-items-center"> Sofia </div>
+                        <div class="me_buttons d-flex gap-1">
+                            <i class="c-pointer hover color-gray px-1 fa-solid fa-circle-notch"></i>
+                            <i class="c-pointer hover color-gray px-1 fa-solid fa-message"></i>
+                            <i class="c-pointer hover color-gray px-2 fa-solid fa-ellipsis-vertical"></i>
+                        </div>
                     </header>
                     <div class="notifications my-bg-white">
                         <div class="top px-1 py-2 d-flex gap-2 align-items-center">
@@ -35,9 +41,9 @@
                         </div>
                         <div class="bottom bg-white m-1 d-flex align-items-center border">
                             <button class="color-gray d-flex no-border h-100 width-search justify-content-center align-items-center btn rounded-0">
-                                <i @click="axchange_icons()" :class="search_icon"></i>
+                                <i @click="search_icons" :class="search_icon"></i>
                             </button>
-                            <input @click="icons_search = false" v-model="search" class="w-100 h-100 fs-7 py-1 no-border fw-semibold" type="text" placeholder="Cerca o inizia una nuova chat">
+                            <input @click="focuss" @blur="blurr" ref="bar_search" v-model="search" class="w-100 h-100 fs-7 py-1 no-border fw-semibold" type="text" placeholder="Cerca o inizia una nuova chat">
                         </div>
                     </div>
                     <nav class="flex-grow-1 bg-info px-2 py-1">

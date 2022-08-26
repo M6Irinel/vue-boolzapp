@@ -6,6 +6,10 @@ body {
     background-color: #fff;
 }
 
+.users header img {
+    height: 40px;
+}
+
 .chat {
     background-color: #e5ddd5;
     flex-grow: 2;
@@ -28,6 +32,14 @@ body {
 }
 
 /* add class ============================================================== */
+
+.hover {
+    filter: brightness(0.5);
+}
+
+.hover:hover {
+    filter: brightness(0.5);
+}
 
 .hover-white:hover {
     color: #fff !important;
