@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <title>Boolzapp</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="./assets/img/ic-boolzapp.png">
+    <script src="https://kit.fontawesome.com/09495c5fdc.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <!-- Bootstrap CSS v5.2.0-beta1 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/style.css">
+
+    <link id="favicon" rel="shortcut icon" type="image/png" href="/img/favicon_c5088e888c97ad440a61d247596f88e5.png" src="/img/favicon_c5088e888c97ad440a61d247596f88e5.png">
+
+  </head>
+  <body>
+    
+    <div id="app">
+        <div class="container h_100 d-flex justify-content-center align-items-center">
+            <div class="view d-flex w-100 h_100 p-3">
+                <div class="users flex-grow-1 d-flex flex-column">
+                    <header class="px-1 py-1">
+                        my user
+                    </header>
+                    <div class="notifications my-bg-white">
+                        <div class="top px-1 py-2 d-flex gap-2 align-items-center">
+                            <i class="d-flex justify-content-center align-items-center rounded-circle square p-2 bg-white c-pointer fa-solid fa-bell-slash"></i>
+                            <div class="paragraphs d-flex flex-column">
+                                <p class="m-0 fs-7 fw-semibold">Ricevi notifiche di nuovi messaggi</p>
+                                <a class="m-0 fs-7 link-dark hover-white" href="#nogo">Attiva notifiche desktop</a>
+                            </div>
+                        </div>
+                        <div class="bottom bg-white m-1 d-flex align-items-center border">
+                            <button class="color-gray d-flex no-border h-100 width-search justify-content-center align-items-center btn rounded-0">
+                                <i @click="axchange_icons()" :class="search_icon"></i>
+                            </button>
+                            <input @click="icons_search = false" v-model="search" class="w-100 h-100 fs-7 py-1 no-border fw-semibold" type="text" placeholder="Cerca o inizia una nuova chat">
+                        </div>
+                    </div>
+                    <nav class="flex-grow-1 bg-info px-2 py-1">
+                        users
+                    </nav>
+                </div>
+                <div class="chat"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/vue.js"></script>
+
+  </body>
+</html>

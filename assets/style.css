@@ -1,0 +1,66 @@
+body {
+    background: linear-gradient(#009688 15%, #dbdbd2 15%) !important;
+}
+
+.users {
+    background-color: #fff;
+}
+
+.chat {
+    background-color: #e5ddd5;
+    flex-grow: 2;
+}
+
+.notifications {
+    vertical-align: middle;
+}
+
+.notifications .top {
+    background-color: #8edafc;
+}
+
+.notifications input[type="text"]:focus-visible {
+    outline: none;
+}
+
+.fa-bell-slash {
+    color: #8edafc;
+}
+
+/* add class ============================================================== */
+
+.hover-white:hover {
+    color: #fff !important;
+}
+
+.no-border {
+    border: none;
+}
+
+.c-pointer {
+    cursor: pointer;
+}
+
+.h_100 {
+    height: 100vh;
+}
+
+.fs-7 {
+    font-size: 0.7rem;
+}
+
+.square {
+    aspect-ratio: 1 !important;
+}
+
+.color-gray {
+    color: #a7a7a7;
+}
+
+.my-bg-white {
+    background-color: #fafafa;
+}
+
+.width-search {
+    min-width: 50px;
+}
