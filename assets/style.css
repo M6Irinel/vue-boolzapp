@@ -19,15 +19,31 @@ body {
     background-color: #8edafc;
 }
 
-.notifications input[type="text"]:focus-visible {
-    outline: none;
-}
-
 .fa-bell-slash {
     color: #8edafc;
 }
 
+.bg-chat {
+    background-image: url('./img/mine.jpg');
+    background-size: 300px;
+    background-position: center;
+}
+
+.sent {
+    background-color: #d5f9ba;
+    align-self: flex-end;
+}
+
+.received {
+    background-color: #fff;
+    align-self: flex-start;
+}
+
 /* add class ============================================================== */
+
+.no-focus-visible {
+    outline: none;
+}
 
 .hover_bg {
     transition: background-color 0.1s ease-in-out;
@@ -69,6 +85,10 @@ body {
     font-size: 0.6rem;
 }
 
+.fs-9 {
+    font-size: 0.5rem;
+}
+
 .square {
     aspect-ratio: 1 !important;
 }
@@ -85,6 +105,46 @@ body {
     min-width: 50px;
 }
 
+.my-w-150 {
+    min-width: 150px;
+}
+
 .img_height {
     height: 40px;
+}
+
+.right-0 {
+    right: 0%;
+}
+
+.flex-grow-2 {
+    flex-grow: 4;
+}
+
+.bg-gray {
+    background-color: #eaeaea;
+}
+
+.max-width {
+    max-width: 250px;
+}
+
+.letter-spacing-1 {
+    letter-spacing: 1px;
+}
+
+.line-height-75 {
+    line-height: 0.75rem;
+}
+
+.z-index-1 {
+    z-index: 1;
+}
+
+.resize-none {
+    resize: none;
+}
+
+.white-space {
+    white-space: pre-wrap
 }
