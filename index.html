@@ -79,11 +79,22 @@
                 <div class="chat flex-grow-2 d-flex flex-column">
                     <header class="px-1 py-1 d-flex align-items-center bg-gray border-start">
 
-                        <img class="img_height rounded-circle square img-fluid" :src="`./assets/img/avatar_${user_select+1}.jpg`" :alt="contacts[user_select].name">
-                        <div class="ms-2 me-auto flex-grow-1">
-                            <p class="m-0 fs-7 fw-semibold"> {{ contacts[user_select].name }} </p>
-                            <p class="m-0 fs-8 color-gray"> {{ action_users }} </p>
-                        </div>
+                        <ul class="list-unstyled me-auto flex-grow-1 m-0">
+                            <template v-for="(user, index) in contacts">
+                                
+                                <li v-if="user_select === index" class="position-relative c-pointer hover_bg d-flex align-items-center gap-3" 
+                                :key="index" 
+                                @click="select_user( index )">
+
+                                    <img class="img_height rounded-circle square img-fluid" :src="`./assets/img/avatar${user.avatar}.jpg`" :alt="user.name">
+                                    <div class="me-auto flex-grow-1">
+                                        <p class="m-0 fs-7 fw-semibold"> {{ user.name }} </p>
+                                        <p class="m-0 fs-8 color-gray"> {{ action_users }} {{ action_users === '...sta scrivendo' ? '' : last_time_received( user ) }} </p>
+                                    </div>
+                                </li>
+
+                            </template>
+                        </ul>
 
                         <div class="me_buttons d-flex gap-1">
                             <i class="c-pointer hover color-gray px-1 fa-solid fa-magnifying-glass"></i>
@@ -110,7 +121,7 @@
                                                 <div class="bg-white position-absolute top-100 right-0 z-index-1 my-w-150 px-1 shadow border p-1" v-if="message.drop_menu === true" @mouseleave="close_drop_menu(message, false)">
                                                     
                                                     <p class="my-0 hover_bg c-pointer p-1" @click="close_drop_menu(message, false)">Info messaggio</p>
-                                                    <p class="my-0 hover_bg c-pointer p-1" @click="close_drop_menu(message, false)">Elimina messaggio</p>
+                                                    <p class="my-0 hover_bg c-pointer p-1" @click="delete_message(messages, i)">Elimina messaggio</p>
                                                 </div>
 
                                             </div>

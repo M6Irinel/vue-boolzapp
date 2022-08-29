@@ -195,7 +195,7 @@ const app = new Vue( {
             sent_message: '',
             is_response: false,
             received_message: '',
-            action_users: ''
+            action_users: `Ultimo accesso oggi alle`
         }
     },
 
@@ -258,12 +258,12 @@ const app = new Vue( {
                 setTimeout( () => {
                     this.is_response = true;
                     this.push_message( user_select, 'received' );
-                    this.action_users = `Ultimo accesso oggi alle ${ this.contacts[ this.user_select ].messages[ this.contacts[ this.user_select ].messages.length - 1 ].date.slice( 11, 16 ) }`;
+                    this.action_users = `Ultimo accesso oggi alle`;
                 }, 1000 );
             };
 
             const container = this.$el.querySelector( "#chat" );
-            container.scrollTop = container.scrollHeight + container.scrollHeight;
+            container.scrollTop = container.scrollHeight;
         },
         
         click_push_message ( user_select, status ) {
@@ -274,6 +274,10 @@ const app = new Vue( {
 
         close_drop_menu ( message, i ) {
             message.drop_menu = i;
+        },
+
+        delete_message (messages, i ) {
+            messages[ this.user_select ].splice( i, 1 );
         },
 
         robot_response ( sent_message ) {
@@ -315,9 +319,5 @@ const app = new Vue( {
         messages () {
             return this.contacts.map( e => e.messages );
         }
-    },
-
-    mounted() {
-        this.action_users = `Ultimo accesso oggi alle ${ this.contacts[ this.user_select ].messages[ this.contacts[ this.user_select ].messages.length - 1 ].date.slice( 11, 16 ) }`;
-    },
+    }
 } );
