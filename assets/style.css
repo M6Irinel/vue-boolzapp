@@ -41,7 +41,7 @@ body {
 
 .bg-chat {
     background-image: url('./img/mine.jpg');
-    background-size: 300px;
+    background-size: 450px;
     background-position: center;
 }
 
@@ -54,6 +54,28 @@ body {
     background-color: #fff;
     align-self: flex-start;
 }
+
+@media screen and (max-width: 991.98px) {
+    .px-4_5 {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+}
+
+@media screen and (max-width: 767.98px) {
+    .min-w-chat {
+        min-width: 150px;
+    }
+
+    .my-fs-5 {
+        font-size: 1rem !important;
+    }
+
+    .my-fs-6 {
+        font-size: 0.75rem !important;
+    }
+}
+
 
 /* add class ============================================================== */
 
@@ -210,4 +232,12 @@ body {
 .px-4_5 {
     padding-left: 2rem;
     padding-right: 2rem;
+}
+
+.m-2_5 {
+    margin: 0.75rem;
+}
+
+.mb-3_5 {
+    margin-bottom: 1.25rem;
 }

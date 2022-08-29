@@ -22,7 +22,7 @@
                     <header class="px-1 py-1 d-flex align-items-center bg-gray fs-5">
 
                         <img class="img_height rounded-circle c-pointer" src="./assets/img/avatar_io.jpg" alt="my img profile">
-                        <div class="ps-3 flex-grow-1 fw-semibold d-flex align-items-center"> Sofia </div>
+                        <div class="ps-0 ps-sm-3 flex-grow-1 fw-semibold d-flex align-items-center"> Sofia </div>
 
                         <div class="me_buttons d-flex gap-1">
                             <i class="c-pointer hover color-gray px-2 fa-solid fa-circle-notch"></i>
@@ -36,10 +36,10 @@
 
                         <div class="top px-3 py-2 d-flex gap-2 align-items-center">
 
-                            <i class="fs-4 d-flex justify-content-center align-items-center rounded-circle square p-2_5 bg-white c-pointer fa-solid fa-bell-slash"></i>
+                            <i class="d-none d-sm-block fs-4 d-flex justify-content-center align-items-center rounded-circle square p-2_5 bg-white c-pointer fa-solid fa-bell-slash"></i>
                             <div class="paragraphs d-flex flex-column">
-                                <p class="m-0 fs-5 fw-semibold">Ricevi notifiche di nuovi messaggi</p>
-                                <a class="m-0 fs-6 link-dark hover-white" href="#nogo">Attiva notifiche desktop</a>
+                                <p class="m-0 my-fs-5 fs-5 fw-semibold">Ricevi notifiche di nuovi messaggi</p>
+                                <a class="m-0 my-fs-6 fs-6 link-dark hover-white" href="#nogo">Attiva notifiche desktop</a>
                             </div>
 
                         </div>
@@ -59,14 +59,14 @@
                         <ul class="list-unstyled">
                             <template v-for="(user, index) in contacts">
 
-                                <li v-if="user.name.toLowerCase().includes( search )" class="position-relative px-3 c-pointer hover_bg d-flex align-items-center hei py-2 gap-3" 
+                                <li v-if="user.name.toLowerCase().includes( search )" class="position-relative px-3 c-pointer hover_bg d-flex flex-column flex-sm-row align-items-center hei py-2 gap-3" 
                                     :key="index" 
                                     @click="select_user( index )">
 
                                         <img class="img_height rounded-circle square img-fluid" :src="`./assets/img/avatar${user.avatar}.jpg`" :alt="user.name">
                                         <div class="ms-auto me-auto flex-grow-1">
                                             <p class="m-0 fs-5 fw-semibold"> {{ user.name }} </p>
-                                            <p class="m-0 fs-6 color-gray pb-2 fw-semibold"> {{ user.messages.length > 0 ? user.messages[user.messages.length-1].message : '' }} </p>
+                                            <p class="m-0 fs-6 color-gray pb-2 fw-semibold d-none d-lg-block"> {{ user.messages.length > 0 ? user.messages[user.messages.length-1].message : '' }} </p>
                                         </div>
                                         <div class="date_envoy fs-6 color-gray position-absolute top-0 right-0 me-2 mt-2"> {{ last_time_received ( user ) }}
                                         </div>
@@ -89,8 +89,8 @@
 
                                     <img class="img_height rounded-circle square img-fluid" :src="`./assets/img/avatar${user.avatar}.jpg`" :alt="user.name">
                                     <div class="me-auto flex-grow-1">
-                                        <p class="m-0 fs-5 fw-semibold"> {{ user.name }} </p>
-                                        <p class="m-0 fs-6"> {{ action_users }} {{ action_users === '...sta scrivendo' ? '' : last_time_received ( user ) }} </p>
+                                        <p class="m-0 fs-5 fw-semibold d-none d-md-block"> {{ user.name }} </p>
+                                        <p class="m-0 fs-6 d-none d-lg-block"> {{ action_users }} {{ action_users === '...sta scrivendo' ? '' : last_time_received ( user ) }} </p>
                                     </div>
                                 </li>
 
@@ -110,10 +110,10 @@
                             <template v-for="(message, i) in messages[user_select]">
 
                                 <li :class="status(message, i)" 
-                                    class="shadow hover-visibility rounded-2 fs-6 fw-semibold position-relative w-50 mx-3 max-width d-flex justify-content-between" 
+                                    class="min-w-chat shadow hover-visibility rounded-2 fs-6 fw-semibold position-relative w-50 mx-3 max-width d-flex justify-content-between" 
                                     :key="i">
 
-                                        <p class="white-space m-2 mb-3 line-height-1_2" v-html="message.message"></p>
+                                        <p class="white-space m-2_5 mb-3_5 line-height-1_2" v-html="message.message"></p>
                                     
                                         <div class="d-flex flex-column justify-content-between">
                                             <div class="d-flex justify-content-center align-items-center p-1 position-relative">
@@ -134,7 +134,7 @@
                             </template>
                             <li class="text-center" v-if="messages[user_select].length <= 0">
                                 <p class="bg-day shadow fs-5 d-inline-block px-2 rounded-2">Oggi</p><br>
-                                <p class="bg-yellow shadow rounded-2 p-3 fs-5 mx-4 d-inline-block"><i class="fa-solid fa-lock"></i> I messaggi e le chiamate sono crittografati end-<br>to-end. Nessuno al di fuori di questa chat, nemmeno<br> WhatsApp, può leggerne o ascoltarne il contenuto.<br> Tocca per saperne di più.</p>
+                                <p class="bg-yellow shadow rounded-2 p-3 my-fs-5 fs-5 mx-4 d-inline-block"><i class="fa-solid fa-lock"></i> I messaggi e le chiamate sono crittografati end-<br>to-end. Nessuno al di fuori di questa chat, nemmeno<br> WhatsApp, può leggerne o ascoltarne il contenuto.<br> Tocca per saperne di più.</p>
                             </li>
                         </ul>
                     </main>
