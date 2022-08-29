@@ -148,3 +148,11 @@ body {
 .white-space {
     white-space: pre-wrap
 }
+
+.bg-yellow {
+    background-color: #fff5c0;
+}
+
+.bg-day {
+    background-color: #d3e0fe;
+}

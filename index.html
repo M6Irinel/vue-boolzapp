@@ -18,6 +18,7 @@
         <div class="container h_100 d-flex justify-content-center align-items-center">
             <div class="view d-flex w-100 h_100 p-3">
                 <div class="users d-flex flex-column flex-grow-1">
+
                     <header class="px-1 py-1 d-flex align-items-center bg-gray">
 
                         <img class="img_height rounded-circle c-pointer" src="./assets/img/avatar_io.jpg" alt="my img profile">
@@ -30,6 +31,7 @@
                         </div>
 
                     </header>
+
                     <div class="notifications my-bg-white">
 
                         <div class="top px-1 py-2 d-flex gap-2 align-items-center">
@@ -113,25 +115,28 @@
                                     :key="i">
 
                                         <p class="white-space m-2 mb-3 line-height-75" v-html="message.message"></p>
-
+                                    
                                         <div class="d-flex flex-column justify-content-between">
                                             <div class="d-flex justify-content-center align-items-center p-1 position-relative">
                                                 <i class="fa-solid fa-chevron-down c-pointer" @click="close_drop_menu(message, true)"></i>
-
+                                                
                                                 <div class="bg-white position-absolute top-100 right-0 z-index-1 my-w-150 px-1 shadow border p-1" v-if="message.drop_menu === true" @mouseleave="close_drop_menu(message, false)">
                                                     
                                                     <p class="my-0 hover_bg c-pointer p-1" @click="close_drop_menu(message, false)">Info messaggio</p>
                                                     <p class="my-0 hover_bg c-pointer p-1" @click="delete_message(messages, i)">Elimina messaggio</p>
                                                 </div>
-
+                                                
                                             </div>
                                             <div class="time_message color-gray fs-9 p-1">
                                                 {{ message.date.slice(11, 16) }}
                                             </div>
                                         </div>
                                 </li>
-
                             </template>
+                            <li class="text-center" v-if="messages[user_select].length <= 0">
+                                <p class="bg-day shadow fs-7 d-inline-block px-2 rounded-2">Oggi</p><br>
+                                <p class="bg-yellow shadow rounded-2 p-3 fs-7 mx-4 d-inline-block"><i class="fa-solid fa-lock"></i> I messaggi e le chiamate sono crittografati end-<br>to-end. Nessuno al di fuori di questa chat, nemmeno<br> WhatsApp, può leggerne o ascoltarne il contenuto.<br> Tocca per saperne di più.</p>
+                            </li>
                         </ul>
                     </main>
 
@@ -152,6 +157,8 @@
             </div>
         </div>
     </div>
+
+
 
     <script src="./assets/vue.js"></script>
 

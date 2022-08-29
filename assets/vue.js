@@ -303,7 +303,7 @@ const app = new Vue( {
         },
 
         last_time_received ( user ) {
-            return user.messages[user.messages.length-1].date.slice( 11, 16 );
+            return user.messages.length > 0 ? user.messages[user.messages.length-1].date.slice( 11, 16 ) : '';
         }
     },
 
