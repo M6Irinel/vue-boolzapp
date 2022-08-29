@@ -17,7 +17,7 @@
     <div id="app" class="fs-7">
         <div class="container h_100 d-flex justify-content-center align-items-center">
             <div class="view d-flex w-100 h_100 p-3">
-                <div class="users d-flex flex-column flex-grow-1">
+                <div class="users d-flex flex-column flex-grow-1 min-width-330">
 
                     <header class="px-1 py-1 d-flex align-items-center bg-gray fs-5">
 
@@ -59,14 +59,14 @@
                         <ul class="list-unstyled">
                             <template v-for="(user, index) in contacts">
 
-                                <li v-if="user.name.toLowerCase().includes( search )" class="position-relative px-3 c-pointer hover_bg d-flex flex-column flex-sm-row align-items-center hei py-2 gap-3" 
+                                <li v-if="user.name.toLowerCase().includes( search )" class="max-heigth-80 position-relative px-3 c-pointer hover_bg d-flex align-items-center hei py-2 gap-3" 
                                     :key="index" 
                                     @click="select_user( index )">
 
                                         <img class="img_height rounded-circle square img-fluid" :src="`./assets/img/avatar${user.avatar}.jpg`" :alt="user.name">
                                         <div class="ms-auto me-auto flex-grow-1">
                                             <p class="m-0 fs-5 fw-semibold"> {{ user.name }} </p>
-                                            <p class="m-0 fs-6 color-gray pb-2 fw-semibold d-none d-lg-block"> {{ user.messages.length > 0 ? user.messages[user.messages.length-1].message : '' }} </p>
+                                            <p class="m-0 fs-6 color-gray pb-2 fw-semibold d-none d-lg-block overflow-hidden"> {{ user.messages.length > 0 ? user.messages[user.messages.length-1].message : '' }} </p>
                                         </div>
                                         <div class="date_envoy fs-6 color-gray position-absolute top-0 right-0 me-2 mt-2"> {{ last_time_received ( user ) }}
                                         </div>
@@ -77,82 +77,93 @@
                     </nav>
                 </div>
                 
-                <div class="chat flex-grow-6 d-flex flex-column">
-                    <header class="px-1 py-1 d-flex align-items-center bg-gray border-start">
-
-                        <ul class="list-unstyled me-auto flex-grow-1 m-0">
-                            <template v-for="(user, index) in contacts">
-                                
-                                <li v-if="user_select === index" class="position-relative c-pointer hover_bg d-flex align-items-center gap-3" 
-                                :key="index" 
-                                @click="select_user( index )">
-
-                                    <img class="img_height rounded-circle square img-fluid" :src="`./assets/img/avatar${user.avatar}.jpg`" :alt="user.name">
-                                    <div class="me-auto flex-grow-1">
-                                        <p class="m-0 fs-5 fw-semibold d-none d-md-block"> {{ user.name }} </p>
-                                        <p class="m-0 fs-6 d-none d-lg-block"> {{ action_users }} {{ action_users === '...sta scrivendo' ? '' : last_time_received ( user ) }} </p>
-                                    </div>
-                                </li>
-
-                            </template>
-                        </ul>
-
-                        <div class="me_buttons d-flex gap-1 fs-5">
-                            <i class="c-pointer hover color-gray px-2 fa-solid fa-magnifying-glass"></i>
-                            <i class="c-pointer hover color-gray ps-2 pe-1 fa-solid fa-paperclip"></i>
-                            <i class="c-pointer hover color-gray px-3 fa-solid fa-ellipsis-vertical"></i>
-                        </div> 
-
-                    </header>
-
-                    <main id="chat" class="overflow-auto flex-grow-1 bg-chat pb-4">
-                        <ul class="list-unstyled d-flex flex-column gap-2 p-3">
-                            <template v-for="(message, i) in messages[user_select]">
-
-                                <li :class="status(message, i)" 
-                                    class="min-w-chat shadow hover-visibility rounded-2 fs-6 fw-semibold position-relative w-50 mx-3 max-width d-flex justify-content-between" 
-                                    :key="i">
-
-                                        <p class="white-space m-2_5 mb-3_5 line-height-1_2" v-html="message.message"></p>
+                <template v-if="chat_active">
+                    <div class="chat flex-grow-6 d-flex flex-column">
+                        <header class="px-1 py-1 d-flex align-items-center bg-gray border-start">
+    
+                            <ul class="list-unstyled me-auto flex-grow-1 m-0">
+                                <template v-for="(user, index) in contacts">
                                     
-                                        <div class="d-flex flex-column justify-content-between">
-                                            <div class="d-flex justify-content-center align-items-center p-1 position-relative">
-                                                <i class="fa-solid fa-chevron-down c-pointer" @click="close_drop_menu(message, true)"></i>
-                                                
-                                                <div class="bg-white position-absolute top-100 right-0 z-index-1 my-w-150 shadow border p-2" v-if="message.drop_menu === true" @mouseleave="close_drop_menu(message, false)">
-                                                    
-                                                    <p class="my-0 hover_bg c-pointer p-1" @click="close_drop_menu(message, false)">Message info</p>
-                                                    <p class="my-0 hover_bg c-pointer p-1" @click="delete_message(messages, i)">Delete message</p>
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="time_message color-gray fs-7 p-1">
-                                                {{ message.date.slice(11, 16) }}
-                                            </div>
+                                    <li v-if="user_select === index" class="position-relative c-pointer hover_bg d-flex align-items-center gap-3" 
+                                    :key="index" 
+                                    @click="select_user( index )">
+    
+                                        <img class="img_height rounded-circle square img-fluid" :src="`./assets/img/avatar${user.avatar}.jpg`" :alt="user.name">
+                                        <div class="me-auto flex-grow-1">
+                                            <p class="m-0 fs-5 fw-semibold d-none d-md-block"> {{ user.name }} </p>
+                                            <p class="m-0 fs-6 d-none d-lg-block"> {{ action_users }} {{ action_users === 'sta scrivendo...' ? '' : last_time_received ( user ) }} </p>
                                         </div>
+                                    </li>
+    
+                                </template>
+                            </ul>
+    
+                            <div class="me_buttons d-flex gap-1 fs-5">
+                                <i class="c-pointer hover color-gray px-2 fa-solid fa-magnifying-glass"></i>
+                                <i class="c-pointer hover color-gray ps-2 pe-1 fa-solid fa-paperclip"></i>
+                                <i class="c-pointer hover color-gray px-3 fa-solid fa-ellipsis-vertical"></i>
+                            </div> 
+    
+                        </header>
+    
+                        <main id="chat" class="overflow-auto flex-grow-1 bg-chat pb-4">
+                            <ul class="list-unstyled d-flex flex-column gap-2 p-3">
+                                <template v-for="(message, i) in messages[user_select]">
+    
+                                    <li :class="status(message, i)" 
+                                        class="min-w-chat shadow hover-visibility rounded-2 fs-6 fw-semibold position-relative w-50 mx-3 max-width d-flex justify-content-between" 
+                                        :key="i">
+    
+                                            <p class="white-space m-2_5 mb-3_5 line-height-1_2" v-html="message.message"></p>
+                                        
+                                            <div class="d-flex flex-column justify-content-between">
+                                                <div class="d-flex justify-content-center align-items-center p-1 position-relative">
+                                                    <i class="fa-solid fa-chevron-down c-pointer" @click="close_drop_menu(message, true)"></i>
+                                                    
+                                                    <div class="bg-white position-absolute top-100 right-0 z-index-1 my-w-150 shadow border p-2" v-if="message.drop_menu === true" @mouseleave="close_drop_menu(message, false)">
+                                                        
+                                                        <p class="my-0 hover_bg c-pointer p-1" @click="close_drop_menu(message, false)">Message info</p>
+                                                        <p class="my-0 hover_bg c-pointer p-1" @click="delete_message(messages, i)">Delete message</p>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="time_message color-gray fs-7 p-1">
+                                                    {{ message.date.slice(11, 16) }}
+                                                </div>
+                                            </div>
+                                    </li>
+                                </template>
+                                <li class="text-center" v-if="messages[user_select].length <= 0">
+                                    <p class="bg-day shadow fs-5 d-inline-block px-2 rounded-2">Oggi</p><br>
+                                    <p class="bg-yellow shadow rounded-2 p-3 my-fs-5 fs-5 mx-4 d-inline-block"><i class="fa-solid fa-lock"></i> I messaggi e le chiamate sono crittografati end-<br>to-end. Nessuno al di fuori di questa chat, nemmeno<br> WhatsApp, può leggerne o ascoltarne il contenuto.<br> Tocca per saperne di più.</p>
                                 </li>
-                            </template>
-                            <li class="text-center" v-if="messages[user_select].length <= 0">
-                                <p class="bg-day shadow fs-5 d-inline-block px-2 rounded-2">Oggi</p><br>
-                                <p class="bg-yellow shadow rounded-2 p-3 my-fs-5 fs-5 mx-4 d-inline-block"><i class="fa-solid fa-lock"></i> I messaggi e le chiamate sono crittografati end-<br>to-end. Nessuno al di fuori di questa chat, nemmeno<br> WhatsApp, può leggerne o ascoltarne il contenuto.<br> Tocca per saperne di più.</p>
-                            </li>
-                        </ul>
-                    </main>
-
-                    <div class="px-1 py-1 d-flex align-items-center bg-gray border-start">
-                        
-                        <div class="me_buttons d-flex gap-1" @click="add_emoticon">
-                            <i class="px-4_5 fs-4 c-pointer hover color-gray fa-solid fa-face-smile"></i>
-                        </div>
+                            </ul>
+                        </main>
+    
+                        <div class="px-1 py-1 d-flex align-items-center bg-gray border-start">
                             
-                        <input class="resize-none letter-spacing--0_5 flex-grow-1 fs-6 no-focus-visible input-group border rounded-1 p-2" @keypress.enter="click_push_message(user_select, 'sent')" cols="1" rows="1" v-model="sent_message" type="text" placeholder="Scrivi un messaggio" ref="message_sent">
-
-                        <div class="me_buttons d-flex gap-1" @click="sent_message !== '' ? click_push_message(user_select, 'sent') : ''">
-                            <i :class="sent_button" class="px-4_5 fs-4 c-pointer hover color-gray"></i>
-                        </div> 
+                            <div class="me_buttons d-flex gap-1" @click="add_emoticon">
+                                <i class="px-4_5 fs-4 c-pointer hover color-gray fa-solid fa-face-smile"></i>
+                            </div>
+                                
+                            <input class="resize-none letter-spacing--0_5 flex-grow-1 fs-6 no-focus-visible input-group border rounded-1 p-2" @keypress.enter="click_push_message(user_select, 'sent')" cols="1" rows="1" v-model="sent_message" type="text" placeholder="Scrivi un messaggio" ref="message_sent">
+    
+                            <div class="me_buttons d-flex gap-1" @click="sent_message !== '' ? click_push_message(user_select, 'sent') : ''">
+                                <i :class="sent_button" class="px-4_5 fs-4 c-pointer hover color-gray"></i>
+                            </div> 
+    
+                        </div>
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="chat flex-grow1 d-flex flex-column">
+    
+                        <main id="chat" class="d-flex justify-content-center align-items-center overflow-auto flex-grow-1 bg-chat-2 pb-4">
+                            <img class="bg-boolzapp-default img-fluid" src="./assets/img/bg-default_2X.jpg" alt="">
+                        </main>
 
                     </div>
-                </div>
+                </template>
             </div>
         </div>
     </div>

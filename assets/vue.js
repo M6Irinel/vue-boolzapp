@@ -192,6 +192,7 @@ const app = new Vue( {
             icons_search: true,
             search: '',
             user_select: 0,
+            chat_active: false,
             sent_message: '',
             is_response: false,
             received_message: '',
@@ -217,7 +218,7 @@ const app = new Vue( {
             if ( this.icons_search && this.search !== '' ) this.search = '';
         },
 
-        select_user ( i ) { this.user_select = i; },
+        select_user ( i ) { this.chat_active = true; this.user_select = i; },
 
         status ( m ) {
             return m.status === 'sent' ? 'sent' : 'received';
@@ -255,7 +256,7 @@ const app = new Vue( {
             this.contacts[ user_select ].messages.push( obg );
 
             if ( !this.is_response ) {
-                this.action_users = '...sta scrivendo';
+                this.action_users = 'sta scrivendo...';
                 setTimeout( () => {
                     this.is_response = true;
                     this.push_message( user_select, 'received' );
