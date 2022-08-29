@@ -191,11 +191,11 @@ const app = new Vue( {
             contacts,
             icons_search: true,
             search: '',
-            time_last_message: '12:00',
             user_select: 0,
             sent_message: '',
             is_response: false,
-            received_message: ''
+            received_message: '',
+            action_users: ''
         }
     },
 
@@ -237,7 +237,7 @@ const app = new Vue( {
             if ( this.sent_message !== '' && !this.is_response ) {
                 obg = {
                     date: `${ d() }/${ M() }/${ y() } ${ h() }:${ m() }:${ s() }`,
-                    message: `${app.sent_message}`,
+                    message: `${ app.sent_message }`,
                     status,
                     drop_menu: false
                 };
@@ -254,16 +254,18 @@ const app = new Vue( {
             this.contacts[ user_select ].messages.push( obg );
 
             if ( !this.is_response ) {
+                this.action_users = '...sta scrivendo';
                 setTimeout( () => {
                     this.is_response = true;
-                    this.push_message( user_select, 'received' )
+                    this.push_message( user_select, 'received' );
+                    this.action_users = `Ultimo accesso oggi alle ${ this.contacts[ this.user_select ].messages[ this.contacts[ this.user_select ].messages.length - 1 ].date.slice( 11, 16 ) }`;
                 }, 1000 );
             };
 
             const container = this.$el.querySelector( "#chat" );
             container.scrollTop = container.scrollHeight + container.scrollHeight;
         },
-
+        
         click_push_message ( user_select, status ) {
             this.is_response = false;
             this.push_message( user_select, status );
@@ -275,24 +277,30 @@ const app = new Vue( {
         },
 
         robot_response ( sent_message ) {
-            switch (sent_message.toLowerCase()) {
+            switch ( sent_message.toLowerCase() ) {
                 case 'ciao':
                     return 'Ciao anche a te!';
                 case 'come stai':
-                    return 'Bene, tu come stai?';
+                    return 'Sto benissimo, tu come stai?';
                 case 'come ti chiami':
                     return 'Mi chiamo Boolzapp &#128512;';
+                case 'come va':
+                    return 'Va tutto alla grande se tu mi vuoi bene &#129325;';
                 case '&#128512;':
                     return '&#128512;';
                 default:
                     return 'OK!';
             }
         },
-        
+
         add_emoticon () {
             this.sent_message += `&#128512;`;
             this.$refs.message_sent.focus();
         },
+
+        last_time_received ( user ) {
+            return user.messages[user.messages.length-1].date.slice( 11, 16 );
+        }
     },
 
     computed: {
@@ -307,5 +315,9 @@ const app = new Vue( {
         messages () {
             return this.contacts.map( e => e.messages );
         }
-    }
+    },
+
+    mounted() {
+        this.action_users = `Ultimo accesso oggi alle ${ this.contacts[ this.user_select ].messages[ this.contacts[ this.user_select ].messages.length - 1 ].date.slice( 11, 16 ) }`;
+    },
 } );
