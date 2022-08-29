@@ -66,10 +66,9 @@
                                         <img class="img_height rounded-circle square img-fluid" :src="`./assets/img/avatar${user.avatar}.jpg`" :alt="user.name">
                                         <div class="ms-auto me-auto flex-grow-1">
                                             <p class="m-0 fs-7 fw-semibold"> {{ user.name }} </p>
-                                            <p class="m-0 fs-8 color-gray pb-2"> Ultimo messaggio inviato </p>
+                                            <p class="m-0 fs-8 color-gray pb-2"> {{ user.messages.length > 0 ? user.messages[user.messages.length-1].message : '' }} </p>
                                         </div>
-                                        <div class="date_envoy fs-8 color-gray position-absolute    top-0 right-0 me-2 mt-2">
-                                            {{ last_time_received( user ) }}
+                                        <div class="date_envoy fs-8 color-gray position-absolute top-0 right-0 me-2 mt-2"> {{ last_time_received ( user ) }}
                                         </div>
                                 </li>
 
@@ -91,7 +90,7 @@
                                     <img class="img_height rounded-circle square img-fluid" :src="`./assets/img/avatar${user.avatar}.jpg`" :alt="user.name">
                                     <div class="me-auto flex-grow-1">
                                         <p class="m-0 fs-7 fw-semibold"> {{ user.name }} </p>
-                                        <p class="m-0 fs-8 color-gray"> {{ action_users }} {{ action_users === '...sta scrivendo' ? '' : last_time_received( user ) }} </p>
+                                        <p class="m-0 fs-8 color-gray"> {{ action_users }} {{ action_users === '...sta scrivendo' ? '' : last_time_received ( user ) }} </p>
                                     </div>
                                 </li>
 
@@ -120,10 +119,10 @@
                                             <div class="d-flex justify-content-center align-items-center p-1 position-relative">
                                                 <i class="fa-solid fa-chevron-down c-pointer" @click="close_drop_menu(message, true)"></i>
                                                 
-                                                <div class="bg-white position-absolute top-100 right-0 z-index-1 my-w-150 px-1 shadow border p-1" v-if="message.drop_menu === true" @mouseleave="close_drop_menu(message, false)">
+                                                <div class="bg-white position-absolute top-100 right-0 z-index-1 my-w-100 shadow border p-2" v-if="message.drop_menu === true" @mouseleave="close_drop_menu(message, false)">
                                                     
-                                                    <p class="my-0 hover_bg c-pointer p-1" @click="close_drop_menu(message, false)">Info messaggio</p>
-                                                    <p class="my-0 hover_bg c-pointer p-1" @click="delete_message(messages, i)">Elimina messaggio</p>
+                                                    <p class="my-0 hover_bg c-pointer p-1" @click="close_drop_menu(message, false)">Message info</p>
+                                                    <p class="my-0 hover_bg c-pointer p-1" @click="delete_message(messages, i)">Delete message</p>
                                                 </div>
                                                 
                                             </div>

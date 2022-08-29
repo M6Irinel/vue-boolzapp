@@ -195,7 +195,8 @@ const app = new Vue( {
             sent_message: '',
             is_response: false,
             received_message: '',
-            action_users: `Ultimo accesso oggi alle`
+            action_users: `Ultimo accesso oggi alle`,
+            last_time_access: ''
         }
     },
 
